@@ -21,8 +21,6 @@ const PopularMenu = () => {
     //         })
     // }, [])
 
-    
-
     return (
         <section>
             <SectionTitle
