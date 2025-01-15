@@ -7,11 +7,17 @@ import 'react-tabs/style/react-tabs.css';
 import useMenu from '../../../hooks/useMenu';
 import FoodCard from '../../../components/FoodCard/FoodCard';
 import OrderTab from '../OrderTab/OrderTab';
+import { useParams } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 const Order = () => {
+    const categories = ['salad', 'pizza', 'soup', 'dessert', 'drinks'];
+    const { category } = useParams();
+    const initialIndex = categories.indexOf(category);
+    const [tabIndex, setTabIndex] = useState(initialIndex);
 
-    const [tabIndex, setTabIndex] = useState(0);
     const [menu] = useMenu();
+
     const dessert = menu.filter(item => item.category === "dessert");
     const soup = menu.filter(item => item.category === "soup");
     const salad = menu.filter(item => item.category === "salad");
@@ -21,13 +27,11 @@ const Order = () => {
 
     return (
         <div>
-            <Cover img={OrderCover} title={"Order Food"}></Cover>
+            <Helmet>
+                <title>Bistro Boss Restaurant | Order Food</title>
+            </Helmet>
 
-            {/* <div role="tablist" className="tabs tabs-lifted">
-                <a role="tab" className="tab">Tab 1</a>
-                <a role="tab" className="tab tab-active">Tab 2</a>
-                <a role="tab" className="tab">Tab 3</a>
-            </div> */}
+            <Cover img={OrderCover} title={"Order Food"}></Cover>
 
             <Tabs selectedIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
                 <TabList>
